@@ -243,10 +243,6 @@ public class DistributedWordCount {
     }
 }
 
-// ====================================================================
-// MOCK IMPLEMENTATIONS (for testing environment)
-// NOTE: These replace the abstract interface in a real environment.
-// ====================================================================
 
 // Mock implementation of DistributedFS (Overriding the provided interface)
 class DistributedFSImpl implements DistributedFS {
@@ -294,3 +290,4 @@ class DistributedFSImpl implements DistributedFS {
         return new ByteArrayInputStream(mockData, start, mockData.length - start);
     }
 }
+
