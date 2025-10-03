@@ -6,10 +6,7 @@ import java.util.concurrent.*;
 import java.util.function.Supplier;
 import java.nio.charset.StandardCharsets;
 
-/**
- * Interface representing the provided Distributed File System API.
- * NOTE: This interface is assumed to be provided and cannot be modified.
- */
+
 interface DistributedFS {
     long fileLength();
     InputStream getData(long offset);
@@ -19,10 +16,7 @@ interface DistributedFS {
     }
 }
 
-/**
- * Class representing the provided Remote Executor API.
- * NOTE: This class is assumed to be provided and cannot be modified.
- */
+
 class RemoteExecutor<T> {
     public T run(int serviceId, Supplier<T> func) {
         // Implementation provided by the environment (MOCK at end of file)
@@ -41,10 +35,7 @@ class RemoteExecutor<T> {
 }
 
 
-/**
- * Main application service to process a huge text file on a distributed system
- * and find the maximum number of words on a single line.
- */
+
 public class DistributedWordCount {
     
     // Total number of available compute nodes (1 to 100 inclusive)
@@ -63,10 +54,7 @@ public class DistributedWordCount {
         this.executorService = Executors.newFixedThreadPool(MAX_LOCAL_THREADS);
     }
     
-    /**
-     * Main method to find the maximum number of words on a single line
-     * @return maximum number of words found on any line
-     */
+
     public int findMaxWordsPerLine() {
         try {
             // Blocking call (100 ms on first call)
@@ -116,10 +104,7 @@ public class DistributedWordCount {
             executorService.shutdown();
         }
     }
-    
-    /**
-     * Executes on the remote node via RemoteExecutor.run().
-     */
+
     private int processPartition(int nodeId, long startOffset, long length, long fileLength) {
         // RemoteExecutor runs the Supplier (lambda) on the remote machine
         return new RemoteExecutor<Integer>().run(nodeId, () -> {
@@ -140,10 +125,7 @@ public class DistributedWordCount {
                 }
             }
             
-            // --- Core Line Reading and Word Counting ---
             
-            // Calculate the actual number of bytes to read from the DFS stream,
-            // which should stop at the end of the partition OR the end of the file.
             long bytesToRead = (startOffset + length > fileLength) ? fileLength - readOffset : (startOffset + length) - readOffset;
 
             if (bytesToRead <= 0) {
@@ -153,8 +135,6 @@ public class DistributedWordCount {
             // Get the stream starting from the corrected readOffset
             try (InputStream is = distributedFS.getData(readOffset)) {
                 
-                // The stream must be limited to bytesToRead so we don't read into the next partition.
-                // We use a limiting stream wrapper for safety, and convert bytes to reader.
                 InputStream limitedStream = new ByteArrayInputStream(
                     is.readNBytes((int) bytesToRead), 0, (int) bytesToRead
                 );
@@ -177,10 +157,6 @@ public class DistributedWordCount {
         });
     }
 
-    /**
-     * Helper to find the first complete line start after an arbitrary byte offset.
-     * This compensates for partial lines caused by byte splitting.
-     */
     private long findNextLineStart(DistributedFS dfs, long offset, long totalLength) throws IOException {
         long currentReadPos = offset;
         
@@ -203,14 +179,10 @@ public class DistributedWordCount {
             }
         }
         
-        // If no newline is found until EOF, start processing from the initial offset 
-        // (this would be a massive single line, or the very end of the file)
         return offset; 
     }
     
-    /**
-     * Counts words in a single line.
-     */
+
     private int countWordsInLine(String line) {
         if (line == null || line.trim().isEmpty()) {
             return 0;
@@ -222,7 +194,6 @@ public class DistributedWordCount {
                 .count();
     }
     
-    // --- Main Method for Execution (using Mocks) ---
     public static void main(String[] args) {
         try {
             // Set up a mock instance that will be used by DistributedFS.getInstance()
@@ -290,4 +261,5 @@ class DistributedFSImpl implements DistributedFS {
         return new ByteArrayInputStream(mockData, start, mockData.length - start);
     }
 }
+
 
