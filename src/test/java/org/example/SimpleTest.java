@@ -27,9 +27,9 @@ public class SimpleTest {
             int result2 = processor2.findMaxWordsPerLine();
             endTime = System.currentTimeMillis();
             
-            System.out.println("✓ Result: " + result2 + " words");
-            System.out.println("✓ Processing time: " + (endTime - startTime) + " ms");
-            System.out.println("✓ Test 2 passed\n");
+            System.out.println(" Result: " + result2 + " words");
+            System.out.println(" Processing time: " + (endTime - startTime) + " ms");
+            System.out.println(" Test 2 passed\n");
             
             // Test 3: Concurrent execution test
             System.out.println("Test 3: Concurrent execution test");
@@ -62,8 +62,8 @@ public class SimpleTest {
                 System.out.println("✓ All concurrent executions returned same result: " + results[0]);
                 System.out.println("✓ Test 3 passed\n");
             } else {
-                System.out.println("❌ Concurrent executions returned different results");
-                System.out.println("❌ Test 3 failed\n");
+                System.out.println(" Concurrent executions returned different results");
+                System.out.println(" Test 3 failed\n");
             }
             
             // Test 4: Edge case test
@@ -75,10 +75,10 @@ public class SimpleTest {
             testWordCount("Multiple   spaces   between   words", 4);
             System.out.println("✓ Test 4 passed\n");
             
-            System.out.println("🎉 All tests completed successfully!");
+            System.out.println(" All tests completed successfully!");
             
         } catch (Exception e) {
-            System.err.println("❌ Test failed: " + e.getMessage());
+            System.err.println(" Test failed: " + e.getMessage());
             e.printStackTrace();
         }
     }
@@ -94,9 +94,10 @@ public class SimpleTest {
         }
         
         if (count == expected) {
-            System.out.println("✓ '" + text + "' -> " + count + " words (expected: " + expected + ")");
+            System.out.println(" '" + text + "' -> " + count + " words (expected: " + expected + ")");
         } else {
-            System.out.println("❌ '" + text + "' -> " + count + " words (expected: " + expected + ")");
+            System.out.println(" '" + text + "' -> " + count + " words (expected: " + expected + ")");
         }
     }
 }
+
