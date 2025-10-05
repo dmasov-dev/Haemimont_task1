@@ -6,7 +6,7 @@ package org.example;
 public class SimpleTest {
     
     public static void main(String[] args) {
-        System.out.println("🧪 Running DistributedWordCount Tests...\n");
+        System.out.println("Running DistributedWordCount Tests...\n");
         
         try {
             // Test 1: Basic functionality
@@ -100,4 +100,5 @@ public class SimpleTest {
         }
     }
 }
+
 
