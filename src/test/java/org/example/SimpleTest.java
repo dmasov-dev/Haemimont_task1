@@ -16,9 +16,9 @@ public class SimpleTest {
             int result = processor.findMaxWordsPerLine();
             long endTime = System.currentTimeMillis();
             
-            System.out.println("✓ Result: " + result + " words");
-            System.out.println("✓ Processing time: " + (endTime - startTime) + " ms");
-            System.out.println("✓ Test 1 passed\n");
+            System.out.println(" Result: " + result + " words");
+            System.out.println(" Processing time: " + (endTime - startTime) + " ms");
+            System.out.println(" Test 1 passed\n");
             
             // Test 2: Performance test
             System.out.println("Test 2: Performance test");
@@ -100,5 +100,6 @@ public class SimpleTest {
         }
     }
 }
+
 
 
