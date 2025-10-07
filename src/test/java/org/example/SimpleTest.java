@@ -59,8 +59,8 @@ public class SimpleTest {
             }
             
             if (allSame) {
-                System.out.println("✓ All concurrent executions returned same result: " + results[0]);
-                System.out.println("✓ Test 3 passed\n");
+                System.out.println(" All concurrent executions returned same result: " + results[0]);
+                System.out.println(" Test 3 passed\n");
             } else {
                 System.out.println(" Concurrent executions returned different results");
                 System.out.println(" Test 3 failed\n");
@@ -73,7 +73,7 @@ public class SimpleTest {
             testWordCount("   Leading spaces   ", 2);
             testWordCount("Trailing spaces   ", 2);
             testWordCount("Multiple   spaces   between   words", 4);
-            System.out.println("✓ Test 4 passed\n");
+            System.out.println(" Test 4 passed\n");
             
             System.out.println(" All tests completed successfully!");
             
@@ -100,6 +100,7 @@ public class SimpleTest {
         }
     }
 }
+
 
 
 
